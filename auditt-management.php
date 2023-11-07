@@ -213,11 +213,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
 
-$amid=$_GET['amid'];
-$sql="SELECT dates FROM audit_management WHERE amid ='$amid';";
 
-$sno=$_GET['id'];
-$sql .= "SELECT * from ans1 where id = '$sno';";
 
 // ============================================================================
 // $sql="Select * from ans1 where id = '$sno'";
@@ -225,9 +221,9 @@ $sql .= "SELECT * from ans1 where id = '$sno';";
 
 // $combinedQuery = " $query1 . $sql ";
 // $result = mysqli_multiple_query($conn,$combinedQuery);
-// ==========================================================================================
 
-two query execution code.
+// ====================================================================================
+two query execute code.
     
 $sno=$_GET['id'];
 $amid=$_GET['amid'];
@@ -249,9 +245,10 @@ if($conn->multi_query($sql)){
     $rows =  $result->fetch_assoc();
     // echo "the query is successfully executed";
 }
-    two query execute code.
-        
-// =============================================================================================================
+
+    two query execution code end.
+    // =======================================================================
+
 // if($conn->result)
 // if($conn->multi_query($sql)){
 //     $result=$conn->store_result();
