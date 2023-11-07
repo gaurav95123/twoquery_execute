@@ -118,16 +118,124 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                     <div class="card-body">
 
                                         <form action="<?php echo $_SERVER['PHP_SELF']; ?>" id="basicform"
-  
-  
-                                        data-parsley-validate="" method="POST" enctype="multipart/form-data">
+                                            data-parsley-validate="" method="POST" enctype="multipart/form-data">
+
 <?php
 
+
+// $amid= `$_GET['amid']`; 
+
+// $sno= $_GET['id'];
+
+
+// $amid= $_GET['amid'];
+// =============================================
+
+
+// $query ="Select am.*, at.auditt, auditor
+// from audit_management am
+// inner join audit_t at on am.id = at.aid";
+
+// ========
+
+// $query = "SELECT str.stname, str.staddresss, str.stphone, sr.result, sc.class, sc.section
+//           FROM studentsrecord str
+//           INNER JOIN studentsresult sr ON str.id = sr.stid
+//           INNER JOIN studentsclass sc ON str.id = sc.cid";
+
+
+// ========================== 
+
+// $query = "SELECT an.*, am.date
+// FROM ans1 an
+// INNER JOIN audit_management am ON an.id = amid";
+
+// =======================================
+
+// $query = "SELECT an.*, am.date
+// FROM ans1 an
+// INNER JOIN audit_management am ON an.id = am.id";
+
+
+// =========================================================
+// $sno= $_GET['id'];
+// $query = "SELECT an.*, am.date
+// FROM ans1 an
+// INNER JOIN audit_management am ON an.id= am.amid ";
+// ================================================================
+
+// $sno = $_GET['id'];
+
+// $query = "SELECT an.*, am.date
+// FROM ans1 an
+// INNER JOIN audit_management am ON an.id = am.amid
+
+// WHERE an.id = $sno";
+
+
+// =====================================================================
+
+// $sno=$_GET['id'];
+// $query="SELECT an.*, am.date
+// FROM ans1 an
+// INNER JOIN audit_management am ON an.id=am.amid
+// WHERE JOIN audit_management am ON an. id=am.amid
+// "
+
+// ==========================================================================
+
+// $query ="Select as.*, dates
+// from ans1 as
+// inner join audit_management am on as.id = am.amid";
+
+// ==============================================================================
+
+// =================================================
+// $sql = "SELECT * FROM ans2 WHERE id ='$id'";
+// working code
+
+
+
+
+// $sqliQuery = "SELECT dates FROM audit_management WHERE amid = '$amid'";
+// $sql = "SELECT * FROM ans1 WHERE id ='$sno'
+// ";
+// $sql="SELECT* from ans1 where id='$sno'";
+
+
+// ==========================================================================
+
+// $amid=$_GET['amid'];
+// $query1="SELECT dates FROM audit_management WHERE amid ='$amid'";
+
+// $sno=$_GET['id'];
+// $sql = "SELECT * from ans1 where id = '$sno'";
+
+
+
+$amid=$_GET['amid'];
+$sql="SELECT dates FROM audit_management WHERE amid ='$amid';";
+
+$sno=$_GET['id'];
+$sql .= "SELECT * from ans1 where id = '$sno';";
+
+// ============================================================================
+// $sql="Select * from ans1 where id = '$sno'";
+//========================================================
+
+// $combinedQuery = " $query1 . $sql ";
+// $result = mysqli_multiple_query($conn,$combinedQuery);
+// ==========================================================================================
+
+two query execution code.
+    
 $sno=$_GET['id'];
 $amid=$_GET['amid'];
 // $sql = "SELECT * from ans1 where id = '$sno';"; 
 
-$sql = "SELECT * from ans1;"; 
+$sql = "SELECT * from ans1 where id = '$sno';"; 
+// $sql = "SELECT * from ans1;"; 
+
 
 $sql .="SELECT dates FROM audit_management WHERE amid ='$amid';";
 
@@ -137,11 +245,39 @@ if($conn->multi_query($sql)){
     $row =  $result->fetch_assoc();
     
     $conn->next_result();
-     $result= $conn->store_result();
-    $row =  $result->fetch_assoc();
+    $result= $conn->store_result();
+    $rows =  $result->fetch_assoc();
+    // echo "the query is successfully executed";
 }
-?>
+    two query execute code.
+        
+// =============================================================================================================
+// if($conn->result)
+// if($conn->multi_query($sql)){
+//     $result=$conn->store_result();
+//     $row=$result->fetch_assoc();
 
+//     $conn->next_result();
+//     $mysqli_result->store_result();
+//     $row=$result->fetch_result();
+//     $multiple_query->fetch_result();
+
+// }
+
+
+
+
+
+
+
+// $result1= mysqli_query($conn,$sql);
+// $result = mysqli_query($conn, $query1);
+// $result1 = mysqli_query($conn, $query1);
+
+// $row = mysqli_fetch_assoc($result1);
+
+
+?>
 <div class="form-group">
      <label for="">GMP Audit</label>
 </div>
@@ -193,7 +329,7 @@ if($conn->multi_query($sql)){
 
 <div class="form-group">
         <label for="inputUserName">Audit Date:</label>
-        <input id="inputUserName" value="<?php echo $row['dates']; ?>" type="text" name="date" required=""
+        <input id="inputUserName" value="<?php echo $rows['dates']; ?>" type="text" name="date" required=""
         placeholder= "Date" autocomplete="off"  class="form-control"  disabled>
 </div>
 
